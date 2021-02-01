@@ -81,6 +81,12 @@
         setTimeout(() => {
             document.querySelector('.load').classList.add('hide');
             document.querySelector('#about').classList.remove('hide');
+
+            swal({
+                title: "Importante!",
+                text: "Esta es una version de prueba, por lo que algunas caracteristicas de la app aún no se encuntran disponibles",
+                icon: "info"
+            });
         }, 3000)
     });
 </script>
