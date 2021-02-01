@@ -1,9 +1,12 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const cors = require('cors');
 const exphbs  = require('express-handlebars');
 
 const PORT = process.env.PORT || 3000;
+
+app.use(cors());
 
 // Body Parser
 app.use(express.json());

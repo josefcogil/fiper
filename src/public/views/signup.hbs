@@ -65,7 +65,7 @@
             role: 'recruiter'
         }
 
-        fetch('http://localhost:3000/signup', {
+        fetch('https://fiper.herokuapp.com/signup', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -88,7 +88,7 @@
                         text: res.msg,
                         icon: "success"
                 })
-                    .then(() => window.location.href = 'http://localhost:3000/login');
+                    .then(() => window.location.href = 'https://fiper.herokuapp.com/login');
             })
             .catch(err => console.error(err));
 
