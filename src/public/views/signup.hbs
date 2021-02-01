@@ -1,0 +1,96 @@
+<div class="load">
+    <div id="loader"></div>
+</div>
+
+<!--FORM-->
+<section class="signup hide">
+    <form class="sign-form" method="POST" id="formSignup" enctype="multipart/form-data">
+        <h3 class="text-center text-secondary mb-4">Sign<span>up</span></h3>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12 form-group">
+                <label class="col-form-label">Name <span>*</span></label>
+                <input type="text" class="form-control" id="name" placeholder="Enter your name">
+            </div>
+            <div class="col-md-6 col-sm-12 form-group">
+                <label class="col-form-label">Lastname <span>*</span></label>
+                <input type="text" class="form-control" id="lastname" placeholder="Enter your lastname">
+            </div>
+            <div class="col-md-6 col-sm-12 form-group">
+                <label class="col-form-label">Email <span>*</span></label>
+                <input type="text" class="form-control" id="email" placeholder="Enter your email">
+            </div>
+            <div class="col-md-6 col-sm-12 form-group">
+                <label class="col-form-label">Phone</label>
+                <input type="text" class="form-control" id="phone" placeholder="Enter your phone number">
+            </div>
+            <div class="col-md-6 col-sm-12 form-group mt-3">
+                <label for="password1">Password <span>*</span></label>
+                <input type="password" class="form-control" id="password1" placeholder="Enter a password">
+            </div>
+            <div class="col-md-6 col-sm-12 form-group mt-3">
+                <label for="password2">Password Repeat <span>*</span></label>
+                <input type="password" class="form-control" id="password2" placeholder="Repeat the password">
+            </div>
+
+            <div class="col-md-12 col-sm-12 text-center mt-2">
+                <input type="submit" class="btn btn-danger btn-outline" value="Register">
+            </div>
+        </div>
+    </form>
+</section>
+<!--/FORM-->
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        console.log('DOM is ready.')
+        setTimeout(() => {
+            document.querySelector('.load').classList.add('hide');
+            document.querySelector('.signup').classList.remove('hide');
+        }, 1000)
+    });
+
+    const formSignup = document.getElementById('formSignup');
+
+    formSignup.addEventListener('submit', e => {
+
+        e.preventDefault();
+
+        let body = {
+            name: document.getElementById('name').value,
+            lastname: document.getElementById('lastname').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            password: document.getElementById('password1').value,
+            role: 'recruiter'
+        }
+
+        fetch('http://localhost:3000/signup', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    swal({
+                        title: "Error!",
+                        text: res.msg,
+                        icon: "error"
+                    });
+                    return;
+                }
+
+                swal({
+                        title: "Done!",
+                        text: res.msg,
+                        icon: "success"
+                })
+                    .then(() => window.location.href = 'http://localhost:3000/login');
+            })
+            .catch(err => console.error(err));
+
+    })
+</script>
