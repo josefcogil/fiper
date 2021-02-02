@@ -43,7 +43,7 @@ module.exports = {
                 fs.writeFile(filePath, JSON.stringify(users), (err) => {
                     if (err) throw err;
 
-                    res.status(201).json({ msg: "User registered", ok: true });
+                    res.status(201).json({ msg: "Thank you for registering, you will be redirected to the home page. New features will be added soon!", ok: true });
                 })
                 break;
 

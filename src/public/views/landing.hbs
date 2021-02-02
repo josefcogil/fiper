@@ -77,14 +77,13 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        console.log('DOM is ready.')
         setTimeout(() => {
             document.querySelector('.load').classList.add('hide');
             document.querySelector('#about').classList.remove('hide');
 
             swal({
                 title: "Importante!",
-                text: "Esta es una version de prueba, por lo que algunas caracteristicas de la app aún no se encuentran disponibles",
+                text: "Esta es una version de prueba, por lo que algunas caracteristicas de la app aún no se encuentran disponibles. Está en inglés :D",
                 icon: "info"
             });
         }, 3000)
