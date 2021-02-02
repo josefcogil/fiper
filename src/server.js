@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const favicon = require('serve-favicon');
 const cors = require('cors');
 const exphbs  = require('express-handlebars');
 
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 // Body Parser
 app.use(express.json());
