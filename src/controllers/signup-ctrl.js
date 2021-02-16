@@ -5,7 +5,7 @@ const filePath = path.join(__dirname, '../store/users.json');
 
 module.exports = {
 
-    addUser: async (req, res) => {
+    addUser: (req, res) => {
         console.log('POST', req.body)
         
         let users = require('../store/users.json');
@@ -27,52 +27,20 @@ module.exports = {
             return;
         }
 
-        switch (req.body.role) {
-            case "recruiter":
-
-                let newRecruiter = {
-                    name: req.body.name,
-                    lastname: req.body.lastname,
-                    email: req.body.email,
-                    password: req.body.password,
-                    role: req.body.role
-                }
-
-                users.push(newRecruiter);
-
-                fs.writeFile(filePath, JSON.stringify(users), (err) => {
-                    if (err) throw err;
-
-                    res.status(201).json({ msg: "Thank you for registering, you will be redirected to the home page. New features will be added soon!", ok: true });
-                })
-                break;
-
-            case "developer":
-
-                if (!req.body.tecnologies) { err = true; msg = "Please enter your tecnologies"; }
-
-                if (err) {
-                    res.status(400).json({ msg, ok: false });
-                    return;
-                }
-
-                let newDeveloper = {
-                    name: req.body.name,
-                    lastname: req.body.lastname,
-                    email: req.body.email,
-                    role: req.body.role,
-                    password: req.body.password,
-                    tecnologies: req.body.tecnologies
-                }
-
-                users.push(newDeveloper);
-
-                fs.writeFile(filePath, JSON.stringify(users), (err) => {
-                    if (err) throw err;
-
-                    res.status(201).json({ msg: "User registered", ok: true });
-                })
-                break;
+        let newUser = {
+            name: req.body.name,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            password: req.body.password,
+            role: req.body.role
         }
+
+        users.push(newUser);
+
+        fs.writeFile(filePath, JSON.stringify(users), (err) => {
+            if (err) throw err;
+
+            res.status(201).json({ msg: "Thank you for registering, you will be redirected to the home page. New features will be added soon!", ok: true });
+        })
     }
 }

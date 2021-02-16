@@ -17,9 +17,6 @@
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
                     </li>
@@ -27,7 +24,7 @@
                         <a class="nav-link" href="/signup">Signup</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Login</a>
+                        <a class="nav-link" href="/login">Login</a>
                     </li>
                 </ul>
             </div>
@@ -40,8 +37,8 @@
         <h3 class="text-white">Are you looking for a <span>developer</span>?</h3>
 
         <div class="buttons mt-5">
-            <a href="/signup"><button class="btn btn-danger">Yes!</button></a>
-            <a href="/signup"><button class="btn btn-outline-danger">I'm a developer</button></a>
+            <a href="/signup"><button class="btn btn-danger" id="rec">Yes!</button></a>
+            <a href="/signup"><button class="btn btn-outline-danger" id="dev">I'm a developer</button></a>
         </div>
     </div>
     <!--/TITLE-->
@@ -64,7 +61,7 @@
 
     <div class="buttons text-center">
         <a href="/signup">
-            <button class="btn btn-outline-danger ml-4">
+            <button class="btn btn-outline-danger ml-4" id="start">
                 Get started
                 <span>
                     <i class="fas fa-arrow-right fas-md ml-2"></i>
@@ -81,6 +78,8 @@
             document.querySelector('.load').classList.add('hide');
             document.querySelector('#about').classList.remove('hide');
 
+            localStorage.removeItem('login');
+
             swal({
                 title: "Importante!",
                 text: "Esta es una version de prueba, por lo que algunas caracteristicas de la app aún no se encuentran disponibles. Está en inglés :D",
@@ -88,4 +87,18 @@
             });
         }, 3000)
     });
+
+    document.getElementById('rec').addEventListener('click', () => {
+        localStorage.setItem('role', 'Recruiter');
+    })
+
+    document.getElementById('dev').addEventListener('click', () => {
+        localStorage.setItem('role', 'Developer');
+    })
+
+    document.getElementById('start').addEventListener('click', () => {
+        if(localStorage.getItem('role')){
+            localStorage.removeItem('role');
+        }
+    })
 </script>

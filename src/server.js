@@ -29,9 +29,15 @@ app.get('/', (req, res) => {
     res.render('landing');
 });
 
+// Serve Home page
+app.get('/home', (req, res) => {
+    res.render('home');
+});
+
 // Routes Array
 const routes = [
-    'signup'
+    'signup',
+    'login'
 ]
 
 // Require routes

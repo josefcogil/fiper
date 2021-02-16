@@ -1,6 +1,9 @@
+const url = 'https://fiper.herokuapp.com';
+const urlDev = 'http://localhost:3000';
+
 // Send POST request
-const post = async body => {
-    let res = await fetch('https://fiper.herokuapp.com/signup', {
+const post = async (body, endpoint) => {
+    let res = await fetch(`${urlDev}${endpoint}`, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -105,6 +108,16 @@ const passwordMatch = (pass1, pass2, container, input) => {
 
         return true;
     }
+}
+
+const validateLogin = () => {
+    let login = localStorage.getItem('login');
+
+    if(!login){
+        window.location.href = urlDev + '/login';
+    }
+
+    return;
 }
 
 // Disable button
