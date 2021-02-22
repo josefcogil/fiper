@@ -1,0 +1,188 @@
+<div class="load">
+    <div id="loader"></div>
+</div>
+
+<!--FORM-->
+<section class="form hide">
+    <form class="form-sign" method="POST" id="formformup">
+        <h3 class="text-center text-secondary mb-4">Sign<span>up</span></h3>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12 form-group" id="input-name">
+                <label class="col-form-label">Name <span>*</span></label>
+                <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                <div class="invalid-feedback">
+                    The name field can only contain letters.
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 form-group" id="input-last">
+                <label class="col-form-label">Lastname <span>*</span></label>
+                <input type="text" class="form-control" id="lastname" placeholder="Enter your lastname">
+                <div class="invalid-feedback">
+                    The lastname field can only contain letters.
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 form-group" id="input-email">
+                <label class="col-form-label">Email <span>*</span></label>
+                <input type="text" class="form-control" id="email" placeholder="Enter your email">
+            </div>
+            <div class="col-md-6 col-sm-12 form-group">
+                <label class="col-form-label">Role <span>*</span></label>
+                <select id="role" class="form-control">
+                    <option value="Recruiter">Recruiter</option>
+                    <option value="Developer">Developer</option>
+                </select>
+            </div>
+            <div class="col-md-6 col-sm-12 form-group mt-3" id="input-password1">
+                <label for="password1">Password <span>*</span></label>
+                <input type="password" class="form-control" id="password1" placeholder="Enter a password">
+                <div class="invalid-feedback">
+                    The password must contain at least one capital letter and one number, with a maximum of 12
+                    characters.
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 form-group mt-3" id="input-password2">
+                <label for="password2">Password Repeat <span>*</span></label>
+                <input type="password" class="form-control" id="password2" placeholder="Repeat the password">
+                <div class="invalid-feedback">
+                    Password doesn't match.
+                </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 text-center mt-2">
+                <button class="btn btn-danger" type="submit" id="btnsubmit">
+                    Register
+                </button>
+            </div>
+        </div>
+    </form>
+</section>
+<!--/FORM-->
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+            document.querySelector('.load').classList.add('hide');
+            document.querySelector('.form').classList.remove('hide');
+        }, 1000)
+    });
+
+    if(localStorage.getItem('role')){
+        document.getElementById('role').value = localStorage.getItem('role');
+    }
+
+    let name = false;
+    let last = false;
+    let email = false;
+    let password = false;
+    let verify = false;
+
+    // Handle name input
+    document.getElementById('name').addEventListener('input', () => {
+        let campo = event.target;
+        let inputName = document.getElementById('input-name');
+
+        name = validateName(campo.value, inputName, campo);
+    });
+
+    // Handle lastname input
+    document.getElementById('lastname').addEventListener('input', () => {
+        let campo = event.target;
+        let inputLast = document.getElementById('input-last');
+
+        last = validateName(campo.value, inputLast, campo);
+    });
+
+    // Handle email input
+    document.getElementById('email').addEventListener('input', () => {
+        let campo = event.target;
+        let inputEmail = document.getElementById('input-email');
+
+        email = validateMail(campo.value, inputEmail, campo);
+    });
+
+    // Handle password input
+    document.getElementById('password1').addEventListener('input', () => {
+        let campo = event.target;
+        let inputPassword = document.getElementById('input-password1');
+
+        password = validatePassword(campo.value, inputPassword, campo);
+    });
+
+    // Handle password2 input
+    document.getElementById('password2').addEventListener('input', () => {
+        let campo = event.target;
+        let inputPassword = document.getElementById('input-password2');
+        let password = document.getElementById('password1').value;
+
+        verify = passwordMatch(password, campo.value, inputPassword, campo);
+    });
+
+
+    // Handle form submit
+    document.getElementById('formformup').addEventListener('submit', e => {
+
+        e.preventDefault();
+
+        let err = false;
+        let msg = '';
+
+        if (!name) { err = true; msg = 'Please enter a valid name'; }
+        else if (!last) { err = true; msg = 'Please enter a valid lastname'; }
+        else if (!email) { err = true; msg = 'Please enter a valid email'; }
+        else if (!password) { err = true; msg = 'Please enter a valid password'; }
+        else if (!verify) { err = true; msg = 'Make sure the passwords match'; }
+
+        if (err) {
+            swal({
+                title: "Error!",
+                text: msg,
+                icon: "error"
+            });
+
+            return;
+        }
+
+        btnDisable(document.getElementById('btnsubmit'), 'Loading...');
+
+        let body = {
+            name: document.getElementById('name').value,
+            lastname: document.getElementById('lastname').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password1').value,
+            role: document.getElementById('role').value
+        }
+
+        let res = post(body, '/signup')
+            .then(res => {
+                btnEnable(document.getElementById('btnsubmit'), 'Register')
+
+                if (!res.ok) {
+                    swal({
+                        title: "Error!",
+                        text: res.msg,
+                        icon: "error"
+                    });
+                    return;
+                }
+
+                swal({
+                    title: "Done!",
+                    text: res.msg,
+                    icon: "success"
+                })
+                    .then(() => window.location.href = urlDev);
+            })
+            .catch(err => {
+                console.error(err)
+                btnEnable(document.getElementById('btnsubmit'), 'Register')
+
+                swal({
+                    title: "Error!",
+                    text: "Cannot connect to the server",
+                    icon: "error"
+                });
+                return;
+            })
+    })
+</script>

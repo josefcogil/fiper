@@ -1,0 +1,9 @@
+.card-container{
+    box-shadow: 0px 10px 10px 1px #6853534b;
+}
+
+@media(max-width: 460px){
+    .res-size{
+        margin-bottom: 3rem;
+    }
+}

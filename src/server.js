@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Views path
-app.set('views', path.join(__dirname, 'public/views'))
+app.set('views', path.join(__dirname, 'views'))
 
 // Set template engine
 app.engine('.hbs', exphbs({extname: '.hbs', layout: 'main.hbs'}));

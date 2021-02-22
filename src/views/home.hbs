@@ -1,0 +1,86 @@
+<div class="load">
+    <div id="loader"></div>
+</div>
+
+<section class="home hide">
+    {{> header}}
+
+    <div class="container p-4">
+        <h3 class="text-center mb-5 text-secondary"><span>New </span>Devs</h3>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 col-sm-12">
+                    <div class="card-container">
+                        <div class="card res-size" style="min-height: 18rem;">
+                            <h5 class="card-header text-center">Jose Gil</h5>
+                            <div class="card-body">
+                                <h6 class="card-title text-center text-danger  mb-4">Backend Developer</h6>
+                                <h6 class="text-center">Tecnologies</h6>
+                                <ul>
+                                    <li>Javascript</li>
+                                    <li>NodeJS</li>
+                                    <li>ExpressJS</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button class="btn btn-danger btn-sm btn-outline">Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-12">
+                    <div class="card-container">
+                        <div class="card res-size" style="min-height: 18rem;">
+                            <h5 class="card-header text-center">Carlos Barrios</h5>
+                            <div class="card-body">
+                                <h6 class="card-title text-center text-danger  mb-4">Frontend Developer</h6>
+                                <h6 class="text-center">Tecnologies</h6>
+                                <ul>
+                                    <li>Javascript</li>
+                                    <li>ReactJS</li>
+                                    <li>GraphQL</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button class="btn btn-danger btn-sm btn-outline">Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-12">
+                    <div class="card-container">
+                        <div class="card res-size" style="min-height: 18rem;">
+                            <h5 class="card-header text-center">Michael Mena</h5>
+                            <div class="card-body">
+                                <h6 class="card-title text-center text-danger  mb-4">Fullstack Developer</h6>
+                                <h6 class="text-center">Tecnologies</h6>
+                                <ul>
+                                    <li>HTML5</li>
+                                    <li>CSS3</li>
+                                    <li>PHP</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button class="btn btn-danger btn-sm btn-outline">Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    validateLogin();
+
+    document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+            document.querySelector('.load').classList.add('hide');
+            document.querySelector('.home').classList.remove('hide');
+        }, 1000)
+    });
+</script>

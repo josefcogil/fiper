@@ -11,9 +11,15 @@ nav a span{
     font-size: 1.5rem;
 }
 
+.title-container{
+    display: flex;
+    align-items: center;
+    height: 80vh;
+}
+
 .title{
-    position: absolute;
-    top: 40%;
+    width: 100%;
+    text-align: center;
 }
 
 .title h3{
