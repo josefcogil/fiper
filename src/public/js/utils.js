@@ -3,7 +3,7 @@ const urlDev = 'http://localhost:3000';
 
 // Send POST request
 const post = async (body, endpoint) => {
-    let res = await fetch(`${urlDev}${endpoint}`, {
+    let res = await fetch(`${url}${endpoint}`, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -114,7 +114,7 @@ const validateLogin = () => {
     let login = localStorage.getItem('login');
 
     if(!login){
-        window.location.href = urlDev + '/login';
+        window.location.href = url + '/login';
     }
 
     return;
